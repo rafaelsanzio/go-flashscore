@@ -12,3 +12,4 @@ COPY . ./
 RUN go build ./cmd/api/main.go
 
 CMD ["./main"]
+
