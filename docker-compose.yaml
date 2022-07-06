@@ -1,0 +1,35 @@
+version: "3.3"
+services:
+  api:
+    container_name: "api-flashscore"
+    build:
+      context: ./
+      dockerfile: Dockerfile.api
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - "mongo"
+    env_file:
+      - .env
+  auth:
+    container_name: "auth-flashscore"
+    build:
+      context: ./
+      dockerfile: Dockerfile.auth
+    ports:
+      - "${APP_AUTH_PORT}:${APP_AUTH_PORT}"
+    depends_on:
+      - "mongo"
+    env_file:
+      - .env
+  mongo:
+    image: "mongo:latest"
+    container_name: "mongo-flashscore"
+    environment:
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
