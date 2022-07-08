@@ -1,0 +1,15 @@
+FROM golang:1.18.2
+
+WORKDIR /go-flashscore
+
+COPY go.mod ./
+COPY go.sum ./
+
+RUN go mod download
+
+COPY . ./
+
+RUN go build ./cmd/kafka/main.go
+
+CMD ["./main"]
+
