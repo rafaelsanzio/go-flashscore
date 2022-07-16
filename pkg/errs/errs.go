@@ -1,6 +1,7 @@
 package errs
 
 var ErrFmt = "err: [%v]"
+var ErrFmtMore = "err: [%v - %v]"
 
 // common
 var (
@@ -65,11 +66,14 @@ var (
 
 // pkg/repo
 var (
-	ErrTeamIsNotFound       = _new("REP001", "team is not found")
-	ErrPlayerIsNotFound     = _new("REP002", "player is not found")
-	ErrTournamentIsNotFound = _new("REP003", "tournament is not found")
-	ErrTransferIsNotFound   = _new("REP004", "transfer is not found")
-	ErrMatchIsNotFound      = _new("REP005", "match is not found")
+	ErrTeamIsNotFound             = _new("REP001", "team is not found")
+	ErrPlayerIsNotFound           = _new("REP002", "player is not found")
+	ErrTournamentIsNotFound       = _new("REP003", "tournament is not found")
+	ErrTransferIsNotFound         = _new("REP004", "transfer is not found")
+	ErrMatchIsNotFound            = _new("REP005", "match is not found")
+	ErrPlayerIsNotFoundInThisTeam = _new("REP006", "player is not found in this team")
+	ErrGoalMinuteUpperToLimit     = _new("REP007", "goal minute cannot be more than 90")
+	ErrSubsSamePlayer             = _new("REP008", "subs cannot be with same player")
 )
 
 // pkg/model
@@ -81,15 +85,17 @@ var (
 
 // pkg/kafka
 var (
-	ErrReadingKafkaMessage        = _new("KAF001", "error reading kafka message")
-	ErrWriteKafkaMessage          = _new("KAF002", "error writing kafka message")
-	ErrHandlingKafkaMessage       = _new("KAF003", "error handling kafka message")
-	ErrHandlingUpdateTeamPlayer   = _new("KAF004", "error handling update team player")
-	ErrHandlingGameEventStarted   = _new("KAF005", "error handling game event started")
-	ErrHandlingGameEventGoal      = _new("KAF006", "error handling game event goal")
-	ErrHandlingGameEventHalftime  = _new("KAF007", "error handling game event halftime")
-	ErrHandlingGameEventFinish    = _new("KAF008", "error handling game event finish")
-	ErrHandlingGameEventExtratime = _new("KAF009", "error handling game event extratime")
+	ErrReadingKafkaMessage           = _new("KAF001", "error reading kafka message")
+	ErrWriteKafkaMessage             = _new("KAF002", "error writing kafka message")
+	ErrHandlingKafkaMessage          = _new("KAF003", "error handling kafka message")
+	ErrHandlingUpdateTeamPlayer      = _new("KAF004", "error handling update team player")
+	ErrHandlingGameEventStarted      = _new("KAF005", "error handling game event started")
+	ErrHandlingGameEventGoal         = _new("KAF006", "error handling game event goal")
+	ErrHandlingGameEventHalftime     = _new("KAF007", "error handling game event halftime")
+	ErrHandlingGameEventFinish       = _new("KAF008", "error handling game event finish")
+	ErrHandlingGameEventExtratime    = _new("KAF009", "error handling game event extratime")
+	ErrHandlingGameEventSubstitution = _new("KAF010", "error handling game event substitution")
+	ErrHandlingGameEventWarning      = _new("KAF011", "error handling game event warning")
 )
 
 // general jobs
