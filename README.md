@@ -43,5 +43,5 @@ To run tests, run the following command
 
 ## API's Documentation
 
-- [Auth](https://linktodocumentation)
-- [API](https://linktodocumentation)
+- [Auth](https://github.com/rafaelsanzio/go-flashscore/tree/main/pkg/auth)
+- [API](https://github.com/rafaelsanzio/go-flashscore/tree/main/pkg/api)
