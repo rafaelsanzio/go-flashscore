@@ -4,6 +4,7 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 GOMOD=$(GOCMD) mod
+GOTOOL=$(GOCMD) tool
 BINARY_NAME=simple_service
 LINTER=golangci-lint
 
@@ -20,3 +21,6 @@ build:
 
 lint:
 	$(LINTER) run
+
+coverage:
+	$(GOTEST) -coverprofile=coverage.out ./... && $(GOTOOL) cover -html=coverage.out
