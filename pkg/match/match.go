@@ -48,8 +48,5 @@ func (mt *Match) FindTeamInMatch(teamID string) bool {
 }
 
 func (mt *Match) IsTheMatchForTournament(tournamentID string) bool {
-	if mt.Tournament.ID == tournamentID {
-		return true
-	}
-	return false
+	return mt.Tournament.ID == tournamentID
 }
