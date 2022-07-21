@@ -40,5 +40,5 @@ func Notify(ctx context.Context, data map[string]string, action model.ActionType
 		Body:   bodyNotify,
 	}
 
-	pro.Create(context.Background())
+	pro.Create(ctx)
 }

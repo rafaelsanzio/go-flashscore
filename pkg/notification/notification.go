@@ -66,7 +66,6 @@ func Handler(ctx context.Context, body, messageId string) errs.AppError {
 			if err != nil {
 				return errs.ErrHandlingGameEventFinish.Throwf(applog.Log, errs.ErrFmt, err.Error())
 			}
-
 		default:
 			return errs.ErrActionNotImplemented.Throwf(applog.Log, errs.ErrFmt, pn.Data["matchEventType"])
 		}
