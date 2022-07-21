@@ -40,3 +40,10 @@ func TestHttpToManyRequests(t *testing.T) {
 
 	assert.Equal(t, http.StatusTooManyRequests, w.Code)
 }
+
+func TestHttpUnauthorized(t *testing.T) {
+	w := httptest.NewRecorder()
+	HttpUnauthorized(w)
+
+	assert.Equal(t, http.StatusUnauthorized, w.Code)
+}
