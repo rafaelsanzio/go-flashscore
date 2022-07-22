@@ -69,7 +69,6 @@ func Handler(ctx context.Context, body, messageId string) errs.AppError {
 		default:
 			return errs.ErrActionNotImplemented.Throwf(applog.Log, errs.ErrFmt, pn.Data["matchEventType"])
 		}
-
 	default:
 		return errs.ErrActionNotImplemented.Throwf(applog.Log, errs.ErrFmt, pn.Action)
 	}

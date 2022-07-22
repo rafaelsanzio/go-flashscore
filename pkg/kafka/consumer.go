@@ -41,5 +41,4 @@ func (c Consumer) Init(ctx context.Context) {
 		// after receiving the message, log its value
 		applog.Log.Infof("Receiving message with Value: %s", string(msg.Value))
 	}
-
 }
