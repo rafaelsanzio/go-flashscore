@@ -23,9 +23,24 @@ Go to the project directory
   cd go-flashscore
 ```
 
-Setting environment variables
+### Setting environment variables
 
-- Create an .env file and filled it same as .env.example shows
+To run this project, you will need to add the following environment variables to your .env file
+
+`APP_PORT`
+`APP_AUTH_PORT`
+
+`MONGO_PASSWORD`
+`MONGO_USERNAME`
+`MONGO_DATABASE`
+`MONGO_PORT`
+`MONGO_URI`
+
+`SECRET_API_KEY`
+
+`KAFKA_ADDRESS_1`
+`KAFKA_ADDRESS_2`
+`KAFKA_ADDRESS_3`
 
 Start the server
 
@@ -41,7 +56,7 @@ To run tests, run the following command
   make test
 ```
 
-## API's Documentation
+## API's Documentation 📑
 
 - [Auth](https://github.com/rafaelsanzio/go-flashscore/tree/main/cmd/auth)
 - [API](https://github.com/rafaelsanzio/go-flashscore/tree/main/cmd/api)
