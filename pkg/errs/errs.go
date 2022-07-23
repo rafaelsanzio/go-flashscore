@@ -36,6 +36,7 @@ var (
 	ErrUnknownConfigProvider = _new("CFG003", "error unknown config provider")
 	ErrGettingEnv            = _new("CFG004", "error unknown get env variables")
 	ErrCreatingJWT           = _new("CFG005", "error signing new JWT")
+	ErrGenerateJWT           = _new("CFG006", "error generate JWT")
 )
 
 // pkg/store
