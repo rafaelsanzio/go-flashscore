@@ -45,25 +45,25 @@ func TestIsAuthorized(t *testing.T) {
 	}{
 		{
 			Name:                  "Should authorized",
-			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20iLCJleHAiOjE2NTg0NDU0MjB9.G2UVesxuTLf6vCS4E6085_ZFPxXELaSeOfHlPCPhBSU",
+			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20ifQ.qtgF2cdlKxQQ-LV5ej43tarZHMXcylxmmSrvQZvtotc",
 			HandleFindByEmailFunc: mockFindByEmailApiKeyFunc,
 			ConfigValueFunc:       configValue,
 			ExpectedError:         false,
 		}, {
 			Name:                  "Should throw an error on find by email function",
-			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20iLCJleHAiOjE2NTg0NDU0MjB9.G2UVesxuTLf6vCS4E6085_ZFPxXELaSeOfHlPCPhBSU",
+			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20ifQ.qtgF2cdlKxQQ-LV5ej43tarZHMXcylxmmSrvQZvtotc",
 			HandleFindByEmailFunc: mockFindByEmailApiKeyThrowFunc,
 			ConfigValueFunc:       configValue,
 			ExpectedError:         true,
 		}, {
 			Name:                  "Should unauthorized with a non exist email",
-			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20iLCJleHAiOjE2NTg0NDU0MjB9.G2UVesxuTLf6vCS4E6085_ZFPxXELaSeOfHlPCPhBSU",
+			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20ifQ.qtgF2cdlKxQQ-LV5ej43tarZHMXcylxmmSrvQZvtotc",
 			HandleFindByEmailFunc: mockFindByEmailApiKeyEmptyFunc,
 			ConfigValueFunc:       configValue,
 			ExpectedError:         true,
 		}, {
 			Name:                  "Should unauthorized with valid until invalid",
-			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20iLCJleHAiOjE2NTg0NDU0MjB9.G2UVesxuTLf6vCS4E6085_ZFPxXELaSeOfHlPCPhBSU",
+			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20ifQ.qtgF2cdlKxQQ-LV5ej43tarZHMXcylxmmSrvQZvtotc",
 			HandleFindByEmailFunc: mockFindByEmailApiKeyWithTokenInvalidFunc,
 			ConfigValueFunc:       configValue,
 			ExpectedError:         true,
@@ -81,13 +81,13 @@ func TestIsAuthorized(t *testing.T) {
 			ExpectedError:         true,
 		}, {
 			Name:                  "Should return an error on config value function",
-			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20iLCJleHAiOjE2NTg0NDU0MjB9.G2UVesxuTLf6vCS4E6085_ZFPxXELaSeOfHlPCPhBSU",
+			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20ifQ.qtgF2cdlKxQQ-LV5ej43tarZHMXcylxmmSrvQZvtotc",
 			HandleFindByEmailFunc: mockFindByEmailApiKeyFunc,
 			ConfigValueFunc:       fakeConfigValue,
 			ExpectedError:         true,
 		}, {
 			Name:                  "Should return an error on invalid key of signature token",
-			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20iLCJleHAiOjE2NTg0NDU0MjB9.G2UVesxuTLf6vCS4E6085_ZFPxXELaSeOfHlPCPhBSU",
+			Token:                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbHNhbnppb0BnbWFpbC5jb20ifQ.qtgF2cdlKxQQ-LV5ej43tarZHMXcylxmmSrvQZvtotc",
 			HandleFindByEmailFunc: mockFindByEmailApiKeyFunc,
 			ConfigValueFunc:       fakeConfigValueWithAnyKey,
 			ExpectedError:         true,
