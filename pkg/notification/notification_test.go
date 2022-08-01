@@ -26,17 +26,9 @@ func mockUpdatePlayerFunc(ctx context.Context, p player.Player) (*player.Player,
 	return &p, nil
 }
 
-func mockUpdatePlayerThrowFunc(ctx context.Context, p player.Player) (*player.Player, errs.AppError) {
-	return nil, errs.ErrRepoMockAction
-}
-
 func mockGetTeamFunc(ctx context.Context, id string) (*team.Team, errs.AppError) {
 	teamMock := prototype.PrototypeTeam()
 	return &teamMock, nil
-}
-
-func mockGetTeamThrowFunc(ctx context.Context, id string) (*team.Team, errs.AppError) {
-	return nil, errs.ErrRepoMockAction
 }
 
 func TestHandler(t *testing.T) {
@@ -63,20 +55,6 @@ func TestHandler(t *testing.T) {
 			HandleGetPlayerFunc:    mockGetPlayerThrowFunc,
 			HandleUpdatePlayerFunc: mockUpdatePlayerFunc,
 			HandleGetTeamFunc:      mockGetTeamFunc,
-			ExpectedError:          true,
-		}, {
-			Name:                   "Handle update team player throw error on update player function",
-			Body:                   `{"Action":"UpdateTeamPlayer","Data":{"playerID":"any-player-id","teamDestinyID":"any-team-id"}}`,
-			HandleGetPlayerFunc:    mockGetPlayerFunc,
-			HandleUpdatePlayerFunc: mockUpdatePlayerThrowFunc,
-			HandleGetTeamFunc:      mockGetTeamFunc,
-			ExpectedError:          true,
-		}, {
-			Name:                   "Handle update team player throw error on get team function",
-			Body:                   `{"Action":"UpdateTeamPlayer","Data":{"playerID":"any-player-id","teamDestinyID":"any-team-id"}}`,
-			HandleGetPlayerFunc:    mockGetPlayerFunc,
-			HandleUpdatePlayerFunc: mockUpdatePlayerFunc,
-			HandleGetTeamFunc:      mockGetTeamThrowFunc,
 			ExpectedError:          true,
 		}, {
 			Name:                   "Handle update team player throw error on unmarshal function",
