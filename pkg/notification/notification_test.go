@@ -235,3 +235,53 @@ func TestHandlerMatchEventGoal(t *testing.T) {
 		}
 	}
 }
+
+func TestHandlerMatchEventHalftime(t *testing.T) {
+	ctx := context.Background()
+
+	testCases := []struct {
+		Name                       string
+		Body                       string
+		HandleGetTournamentFunc    func(ctx context.Context, id string) (*tournament.Tournament, errs.AppError)
+		FindMatchForTournamentFunc func(ctx context.Context, id string, tournamentID string) (*match.Match, errs.AppError)
+		UpdateMatchFunc            func(ctx context.Context, m match.Match) (*match.Match, errs.AppError)
+		ExpectedError              bool
+	}{
+		{
+			Name:                       "Handle action game event match halftime",
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Halftime", "tournamentID":"any-tournament-id","matchID":"any-match-id", "halftime":"any-halftime"}}`,
+			HandleGetTournamentFunc:    mockGetTournamentFunc,
+			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
+			UpdateMatchFunc:            mockUpdateMatchFunc,
+			ExpectedError:              false,
+		}, {
+			Name:                       "Handle action game event match halftime error",
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Halftime", "tournamentID":"any-tournament-id","matchID":"any-match-id", "halftime":"any-halftime"}}`,
+			HandleGetTournamentFunc:    mockGetTournamentThrowFunc,
+			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
+			UpdateMatchFunc:            mockUpdateMatchFunc,
+			ExpectedError:              true,
+		},
+	}
+
+	for _, tc := range testCases {
+
+		repo.SetTournamentRepo(repo.MockTournamentRepo{
+			GetFunc: tc.HandleGetTournamentFunc,
+		})
+		defer repo.SetTournamentRepo(nil)
+
+		repo.SetMatchRepo(repo.MockMatchRepo{
+			FindMatchForTournamentFunc: tc.FindMatchForTournamentFunc,
+			UpdateFunc:                 tc.UpdateMatchFunc,
+		})
+		defer repo.SetMatchRepo(nil)
+
+		err := Handler(ctx, tc.Body, "any-key")
+		if tc.ExpectedError {
+			assert.NotNil(t, err)
+		} else {
+			assert.NoError(t, err)
+		}
+	}
+}
