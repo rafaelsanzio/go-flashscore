@@ -76,6 +76,7 @@ func TestHandlerUpdateTeamPlayer(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
+		t.Logf(tc.Name)
 
 		repo.SetPlayerRepo(repo.MockPlayerRepo{
 			GetFunc:    tc.HandleGetPlayerFunc,
@@ -144,6 +145,7 @@ func TestHandlerMatchEventStart(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
+		t.Logf(tc.Name)
 
 		repo.SetTournamentRepo(repo.MockTournamentRepo{
 			GetFunc: tc.HandleGetTournamentFunc,
@@ -205,6 +207,7 @@ func TestHandlerMatchEventGoal(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
+		t.Logf(tc.Name)
 
 		repo.SetTournamentRepo(repo.MockTournamentRepo{
 			GetFunc: tc.HandleGetTournamentFunc,
@@ -265,6 +268,7 @@ func TestHandlerMatchEventHalftime(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
+		t.Logf(tc.Name)
 
 		repo.SetTournamentRepo(repo.MockTournamentRepo{
 			GetFunc: tc.HandleGetTournamentFunc,
@@ -276,6 +280,33 @@ func TestHandlerMatchEventHalftime(t *testing.T) {
 			UpdateFunc:                 tc.UpdateMatchFunc,
 		})
 		defer repo.SetMatchRepo(nil)
+
+		err := Handler(ctx, tc.Body, "any-key")
+		if tc.ExpectedError {
+			assert.NotNil(t, err)
+		} else {
+			assert.NoError(t, err)
+		}
+	}
+}
+
+func TestHandlerMatchEventNotFound(t *testing.T) {
+	ctx := context.Background()
+
+	testCases := []struct {
+		Name          string
+		Body          string
+		ExpectedError bool
+	}{
+		{
+			Name:          "Handle action game event that don't exist",
+			Body:          `{"Action":"ActionGameEvents","Data":{"matchEventType":"Default", "tournamentID":"any-tournament-id","matchID":"any-match-id"}}`,
+			ExpectedError: true,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Logf(tc.Name)
 
 		err := Handler(ctx, tc.Body, "any-key")
 		if tc.ExpectedError {
