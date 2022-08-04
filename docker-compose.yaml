@@ -1,27 +1,5 @@
-version: "3.3"
+version: "3.8"
 services:
-  api:
-    container_name: "api-flashscore"
-    build:
-      context: ./
-      dockerfile: Dockerfile.api
-    ports:
-      - "${APP_PORT}:${APP_PORT}"
-    depends_on:
-      - "mongo"
-    env_file:
-      - .env
-  auth:
-    container_name: "auth-flashscore"
-    build:
-      context: ./
-      dockerfile: Dockerfile.auth
-    ports:
-      - "${APP_AUTH_PORT}:${APP_AUTH_PORT}"
-    depends_on:
-      - "mongo"
-    env_file:
-      - .env
   mongo:
     image: "mongo:latest"
     container_name: "mongo-flashscore"
@@ -33,6 +11,36 @@ services:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
     ports:
       - "${MONGO_PORT}:${MONGO_PORT}"
+  redis:
+    image: redis:6.2-alpine
+    container_name: "redis-flashscore"
+    restart: always
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+  api:
+    container_name: "api-flashscore"
+    build:
+      context: ./
+      dockerfile: Dockerfile.api
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - "mongo"
+      - "redis"
+    env_file:
+      - .env
+  auth:
+    container_name: "auth-flashscore"
+    build:
+      context: ./
+      dockerfile: Dockerfile.auth
+    ports:
+      - "${APP_AUTH_PORT}:${APP_AUTH_PORT}"
+    depends_on:
+      - "mongo"
+      - "redis"
+    env_file:
+      - .env
 
   zk1:
     image: confluentinc/cp-zookeeper:5.4.3
