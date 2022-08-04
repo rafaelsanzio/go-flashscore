@@ -23,6 +23,8 @@ var (
 	AppAuthPort     = Key{Name: "APP_AUTH_PORT", Secure: false, Provider: ProviderStore}
 	SecretApiKey    = Key{Name: "SECRET_API_KEY", Secure: false, Provider: ProviderStore}
 
+	RedisPort = Key{Name: "REDIS_PORT", Secure: false, Provider: ProviderStore}
+
 	KafkaAddress1 = Key{Name: "KAFKA_ADDRESS_1", Secure: false, Provider: ProviderStore}
 	KafkaAddress2 = Key{Name: "KAFKA_ADDRESS_2", Secure: false, Provider: ProviderStore}
 	KafkaAddress3 = Key{Name: "KAFKA_ADDRESS_3", Secure: false, Provider: ProviderStore}
