@@ -16,6 +16,8 @@ var Values = map[key.Key]string{
 	key.AppAuthPort:     getDefaultOrEnvVar("5001", "APP_AUTH_PORT"),
 	key.SecretApiKey:    getDefaultOrEnvVar("flashscore", "SECRET_API_KEY"),
 
+	key.RedisPort: getDefaultOrEnvVar("6379", "REDIS_PORT"),
+
 	key.KafkaAddress1: getDefaultOrEnvVar("kafka-1:19092", "KAFKA_ADDRESS_1"),
 	key.KafkaAddress2: getDefaultOrEnvVar("kafka-2:29092", "KAFKA_ADDRESS_2"),
 	key.KafkaAddress3: getDefaultOrEnvVar("kafka-3:39092", "KAFKA_ADDRESS_3"),
