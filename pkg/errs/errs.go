@@ -55,6 +55,7 @@ var (
 	ErrParseRequestURI      = _new("STR011", "error parsing request uri")
 	ErrMarshalingBson       = _new("STR012", "error marshaling bson")
 	ErrUnmarshalingBson     = _new("STR013", "error unmarshaling bson")
+	ErrRedisConnect         = _new("STR014", "error connecting to redis")
 )
 
 // pkg/middleware
