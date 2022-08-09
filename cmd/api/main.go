@@ -14,6 +14,7 @@ import (
 
 	"github.com/rafaelsanzio/go-flashscore/pkg/api"
 	"github.com/rafaelsanzio/go-flashscore/pkg/applog"
+	"github.com/rafaelsanzio/go-flashscore/pkg/cache"
 	"github.com/rafaelsanzio/go-flashscore/pkg/config"
 	"github.com/rafaelsanzio/go-flashscore/pkg/config/key"
 	"github.com/rafaelsanzio/go-flashscore/pkg/errs"
@@ -26,7 +27,8 @@ func main() {
 		_ = errs.ErrGettingEnv.Throwf(applog.Log, errs.ErrFmt, err)
 	}
 
-	store.GetStore()
+	store.GetStore() // mongo
+	cache.GetStore() // redis
 
 	mongoURI, err_ := config.Value(key.MongoURI)
 	if err_ != nil {
