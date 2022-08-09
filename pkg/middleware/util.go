@@ -1,6 +1,9 @@
 package middleware
 
 import (
+	"encoding/json"
+	"net/http"
+
 	"github.com/rafaelsanzio/go-flashscore/pkg/config"
 	"github.com/rafaelsanzio/go-flashscore/pkg/config/key"
 	"github.com/rafaelsanzio/go-flashscore/pkg/errs"
@@ -28,4 +31,24 @@ func fakeConfigValueWithAnyKey(k key.Key) (string, errs.AppError) {
 
 func restoreConfigValue(replace func(k key.Key) (string, errs.AppError)) {
 	configValue = replace
+}
+
+var jsonMarshal = json.Marshal
+
+func fakeMarshal(v interface{}) ([]byte, error) {
+	return []byte{}, errs.ErrMarshalingJson
+}
+
+func restoreMarshal(replace func(v interface{}) ([]byte, error)) {
+	jsonMarshal = replace
+}
+
+var write = http.ResponseWriter.Write
+
+func fakeWrite(http.ResponseWriter, []byte) (int, error) {
+	return 0, errs.ErrResponseWriter
+}
+
+func restoreWrite(replace func(http.ResponseWriter, []byte) (int, error)) {
+	write = replace
 }
