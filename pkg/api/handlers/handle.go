@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -10,7 +9,6 @@ import (
 	"github.com/rafaelsanzio/go-flashscore/pkg/applog"
 	"github.com/rafaelsanzio/go-flashscore/pkg/errs"
 	"github.com/rafaelsanzio/go-flashscore/pkg/middleware"
-	"github.com/rafaelsanzio/go-flashscore/pkg/redis"
 )
 
 var rateLimit = rate.NewLimiter(rate.Every(10*time.Second), 10) // 10 request every 10 seconds
@@ -33,9 +31,11 @@ func HandleAdapter(hf http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		// verify cache if exists
+		middleware.VerifyCache(w, r)
+
+		/* 	// verify cache if exists
 		cacheKey := fmt.Sprintf("%s%s", r.Method, r.URL)
-		value, err_ := redis.Get(r.Context(), cacheKey)
+		value, err_ := cache.GetStore().Get(r.Context(), cacheKey)
 		if value != nil && err_ == nil {
 			data, err_ := jsonMarshal(value)
 			if err_ != nil {
@@ -57,7 +57,7 @@ func HandleAdapter(hf http.HandlerFunc) http.HandlerFunc {
 
 		if value == nil {
 			applog.Log.Warnf("Cache does not exist for this key: %s", cacheKey)
-		}
+		} */
 
 		hf(w, r)
 	}
