@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/rafaelsanzio/go-flashscore/pkg/applog"
+	"github.com/rafaelsanzio/go-flashscore/pkg/cache"
 	"github.com/rafaelsanzio/go-flashscore/pkg/errs"
 	"github.com/rafaelsanzio/go-flashscore/pkg/model/repo"
-	"github.com/rafaelsanzio/go-flashscore/pkg/redis"
 )
 
 func HandleListTeam(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +27,7 @@ func HandleListTeam(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cacheKey := fmt.Sprintf("%s%s", r.Method, r.URL)
-	_err := redis.Set(ctx, cacheKey, data)
+	_err := cache.GetStore().Set(ctx, cacheKey, data)
 	if _err != nil {
 		applog.Log.Warnf("Cache could not be set for this key: %s with error: %s", cacheKey, _err.Error())
 	}
