@@ -300,7 +300,7 @@ func TestHandlerMatchEventNotFound(t *testing.T) {
 	}{
 		{
 			Name:          "Handle action game event that don't exist",
-			Body:          `{"Action":"ActionGameEvents","Data":{"matchEventType":"Default", "tournamentID":"any-tournament-id","matchID":"any-match-id"}}`,
+			Body:          `{"Action":"ActionGameEvents","Data":{"matchEventType":"Default", "tournamentID":"any-tournament-id", "matchID":"any-match-id"}}`,
 			ExpectedError: true,
 		},
 	}
@@ -330,14 +330,14 @@ func TestHandlerMatchEventExtratime(t *testing.T) {
 	}{
 		{
 			Name:                       "Handle action game event match extratime",
-			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Extratime", "tournamentID":"any-tournament-id","matchID":"any-match-id", "extratime":"5"}}`,
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Extratime", "tournamentID":"any-tournament-id", "matchID":"any-match-id", "extratime":"5"}}`,
 			HandleGetTournamentFunc:    mockGetTournamentFunc,
 			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
 			UpdateMatchFunc:            mockUpdateMatchFunc,
 			ExpectedError:              false,
 		}, {
 			Name:                       "Handle action game event match extratime error",
-			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Extratime", "tournamentID":"any-tournament-id","matchID":"any-match-id", "extratime":"5"}}`,
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Extratime", "tournamentID":"any-tournament-id", "matchID":"any-match-id", "extratime":"5"}}`,
 			HandleGetTournamentFunc:    mockGetTournamentThrowFunc,
 			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
 			UpdateMatchFunc:            mockUpdateMatchFunc,
