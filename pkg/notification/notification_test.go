@@ -46,28 +46,28 @@ func TestHandlerUpdateTeamPlayer(t *testing.T) {
 	}{
 		{
 			Name:                   "Handle update team player correct",
-			Body:                   `{"Action":"UpdateTeamPlayer","Data":{"playerID":"any-player-id","teamDestinyID":"any-team-id"}}`,
+			Body:                   `{"Action":"UpdateTeamPlayer", "Data":{"playerID":"any-player-id", "teamDestinyID":"any-team-id"}}`,
 			HandleGetPlayerFunc:    mockGetPlayerFunc,
 			HandleGetTeamFunc:      mockGetTeamFunc,
 			HandleUpdatePlayerFunc: mockUpdatePlayerFunc,
 			ExpectedError:          false,
 		}, {
 			Name:                   "Handle update team player throw error on get player function",
-			Body:                   `{"Action":"UpdateTeamPlayer","Data":{"playerID":"any-player-id","teamDestinyID":"any-team-id"}}`,
+			Body:                   `{"Action":"UpdateTeamPlayer", "Data":{"playerID":"any-player-id", "teamDestinyID":"any-team-id"}}`,
 			HandleGetPlayerFunc:    mockGetPlayerThrowFunc,
 			HandleGetTeamFunc:      mockGetTeamFunc,
 			HandleUpdatePlayerFunc: mockUpdatePlayerFunc,
 			ExpectedError:          true,
 		}, {
 			Name:                   "Handle update team player throw error on unmarshal function",
-			Body:                   `{"Action":"UpdateTeamPlayer","Data":{"playerID":"any-player-id","teamDestinyID":"any-team-id"}`,
+			Body:                   `{"Action":"UpdateTeamPlayer", "Data":{"playerID":"any-player-id", "teamDestinyID":"any-team-id"}`,
 			HandleGetPlayerFunc:    mockGetPlayerFunc,
 			HandleGetTeamFunc:      mockGetTeamFunc,
 			HandleUpdatePlayerFunc: mockUpdatePlayerFunc,
 			ExpectedError:          true,
 		}, {
 			Name:                   "Handle update team player throw error on non exist action",
-			Body:                   `{"Action":"Unknown","Data":{"playerID":"any-player-id","teamDestinyID":"any-team-id"}}`,
+			Body:                   `{"Action":"Unknown", "Data":{"playerID":"any-player-id", "teamDestinyID":"any-team-id"}}`,
 			HandleGetPlayerFunc:    mockGetPlayerFunc,
 			HandleGetTeamFunc:      mockGetTeamFunc,
 			HandleUpdatePlayerFunc: mockUpdatePlayerFunc,
@@ -129,14 +129,14 @@ func TestHandlerMatchEventStart(t *testing.T) {
 	}{
 		{
 			Name:                       "Handle action game event match start",
-			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Start", "tournamentID":"any-tournament-id","matchID":"any-match-id", "timeStarted":"16:00"}}`,
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Start", "tournamentID":"any-tournament-id", "matchID":"any-match-id", "timeStarted":"16:00"}}`,
 			HandleGetTournamentFunc:    mockGetTournamentFunc,
 			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
 			UpdateMatchFunc:            mockUpdateMatchFunc,
 			ExpectedError:              false,
 		}, {
 			Name:                       "Handle action game event match start error",
-			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Start", "tournamentID":"any-tournament-id","matchID":"any-match-id", "timeStarted":"16:00"}}`,
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Start", "tournamentID":"any-tournament-id", "matchID":"any-match-id", "timeStarted":"16:00"}}`,
 			HandleGetTournamentFunc:    mockGetTournamentThrowFunc,
 			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
 			UpdateMatchFunc:            mockUpdateMatchFunc,
@@ -196,7 +196,7 @@ func TestHandlerMatchEventGoal(t *testing.T) {
 			ExpectedError:              false,
 		}, {
 			Name:                       "Handle action game event match goal error",
-			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Goal", "tournamentID":"any-tournament-id","matchID":"any-match-id", "player":"any-player-id", "goalMinute":"10"}}`,
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Goal", "tournamentID":"any-tournament-id", "matchID":"any-match-id", "player":"any-player-id", "goalMinute":"10"}}`,
 			HandleGetTournamentFunc:    mockGetTournamentThrowFunc,
 			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
 			HandleGetTeamFunc:          mockGetTeamFunc,
