@@ -187,7 +187,7 @@ func TestHandlerMatchEventGoal(t *testing.T) {
 	}{
 		{
 			Name:                       "Handle action game event match goal",
-			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Goal", "tournamentID":"any-tournament-id","matchID":"any-match-id", "player":"any-player-id", "goalMinute":"10"}}`,
+			Body:                       `{"Action":"ActionGameEvents","Data":{"matchEventType":"Goal", "tournamentID":"any-tournament-id", "matchID":"any-match-id", "player":"any-player-id", "goalMinute":"10"}}`,
 			HandleGetTournamentFunc:    mockGetTournamentFunc,
 			FindMatchForTournamentFunc: mockFindMatchForTournamentFunc,
 			HandleGetTeamFunc:          mockGetTeamFunc,
