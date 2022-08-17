@@ -7,6 +7,7 @@ An API to handle soccer tournaments
 - [Golang](https://go.dev/)
 - [Docker](https://www.docker.com/)
 - [Kafka](https://kafka.apache.org/)
+- [Redis](https://redis.io/)
 - [JWT](https://jwt.io/)
 
 ## Run Locally ▶️
@@ -35,6 +36,8 @@ To run this project, you will need to add the following environment variables to
 `MONGO_DATABASE`
 `MONGO_PORT`
 `MONGO_URI`
+
+`REDIS_PORT`
 
 `SECRET_API_KEY`
 
