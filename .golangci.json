@@ -1,0 +1,36 @@
+{
+  "run": {
+    "tests": true
+  },
+  "linters-settings": {
+    "govet": {
+      "disable": ["composites"]
+    }
+  },
+  "linters": {
+    "enable": ["unconvert", "goimports"],
+    "disable": ["unused", "errcheck"]
+  },
+  "issues": {
+    "max-same-issues": 0,
+    "max-issues-per-linter": 0,
+    "exclude-rules": [
+      {
+        "linters": ["staticcheck"],
+        "text": "SA9004:"
+      },
+      {
+        "linters": ["staticcheck"],
+        "text": "SA5001:"
+      },
+      {
+        "linters": ["staticcheck"],
+        "text": "SA5011:"
+      },
+      {
+        "linters": ["govet"],
+        "text": "copylocks:"
+      }
+    ]
+  }
+}
