@@ -111,7 +111,7 @@ func HandlePostMatchGoal(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	goalMinuteAsString := strconv.Itoa(int(goalMinute))
+	goalMinuteAsString := strconv.Itoa(goalMinute)
 
 	data := map[string]string{
 		"matchEventType": string(model.EventGoal),
