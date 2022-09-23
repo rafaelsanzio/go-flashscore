@@ -27,10 +27,7 @@ func HandleListTeam(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cacheKey := fmt.Sprintf("%s%s", r.Method, r.URL)
-	_err := cache.GetStore().Set(ctx, cacheKey, data)
-	if _err != nil {
-		applog.Log.Warnf("Cache could not be set for this key: %s with error: %s", cacheKey, _err.Error())
-	}
+	cache.SetCache(ctx, cacheKey, data)
 
 	_, err_ = write(w, data)
 	if err_ != nil {
