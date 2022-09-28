@@ -23,5 +23,5 @@ func TestNewRouter(t *testing.T) {
 
 	res, err = http.DefaultClient.Get(notFoundURL)
 	assert.NoError(t, err)
-	assert.Equal(t, 500, res.StatusCode)
+	assert.Equal(t, 404, res.StatusCode)
 }
