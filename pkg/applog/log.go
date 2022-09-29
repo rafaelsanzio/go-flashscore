@@ -26,6 +26,7 @@ const (
 	WARN
 	ERROR
 	FATAL
+	STACK
 )
 
 var (
@@ -45,6 +46,8 @@ func (l Level) String() string {
 		return "ERROR"
 	case FATAL:
 		return "FATAL"
+	case STACK:
+		return "STACK"
 	default:
 		return "<unknown>"
 	}
@@ -109,7 +112,7 @@ func (l *logger) Fatalf(format string, v ...interface{}) {
 }
 
 func (l *logger) Stackf(format string, v ...interface{}) {
-	lvl := fmt.Sprintf(levelFmt, "STACK")
+	lvl := fmt.Sprintf(levelFmt, STACK)
 	msg := fmt.Sprintf(format, v...)
 	l.logger.Print(lvl + msg)
 }
