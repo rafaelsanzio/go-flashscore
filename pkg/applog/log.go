@@ -71,7 +71,8 @@ func (l *logger) Debugf(format string, v ...interface{}) {
 	if shouldLog(DEBUG) {
 		lvl := fmt.Sprintf(levelFmt, DEBUG)
 		msg := fmt.Sprintf(format, v...)
-		l.logger.Print(lvl + msg)
+		lvlWithMsg := lvl + msg
+		l.logger.Print(lvlWithMsg)
 	}
 }
 
