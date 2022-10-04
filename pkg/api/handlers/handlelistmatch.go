@@ -1,9 +1,11 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/rafaelsanzio/go-flashscore/pkg/applog"
+	"github.com/rafaelsanzio/go-flashscore/pkg/cache"
 	"github.com/rafaelsanzio/go-flashscore/pkg/errs"
 	"github.com/rafaelsanzio/go-flashscore/pkg/model/repo"
 )
@@ -23,6 +25,9 @@ func HandleListMatch(w http.ResponseWriter, r *http.Request) {
 		errs.HttpInternalServerError(w)
 		return
 	}
+
+	cacheKey := fmt.Sprintf("%s%s", r.Method, r.URL)
+	cache.SetCache(ctx, cacheKey, data)
 
 	_, err_ = write(w, data)
 	if err_ != nil {
